@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cluely | #1 Undetectable AI for Meetings",
-  description: "Cluely takes perfect meeting notes and gives real-time answers, all while completely undetectable.",
+  title: "Multimillion Clippers | #1 Clipping Community",
+  description: "Get millions of views organically. Zero wasted budget.",
+  icons: {
+    icon: "/mmclipperslogo.png",
+    apple: "/mmclipperslogo.png",
+  },
 };
 
 export default function RootLayout({

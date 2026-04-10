@@ -8,96 +8,164 @@ export default function Steps() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.3
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    hidden: { opacity: 0, scale: 0.95, y: 30 },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      y: 0, 
+      transition: { duration: 0.8 } 
+    }
   };
 
+  const steps = [
+    {
+      number: "1",
+      title: "Jump on a call with our team",
+      description: "Bring yourself and your vision to a quick call. We handle strategy, campaign structure, and rollout planning from there.",
+      side: "right",
+    },
+    {
+      number: "2",
+      title: "Launch the distribution wave",
+      description: "Once live, our network of experienced clippers starts publishing for your brand. They launch wave after wave of content across TikTok, Reels, X, and YouTube Shorts to generate organic reach at scale.",
+      side: "left",
+    },
+    {
+      number: "3",
+      title: "Track Performance In Real Time",
+      description: "We provide a dashboard where you can track videos created, views generated, and the performance patterns shaping the next wave.",
+      side: "right",
+    }
+  ];
+
   return (
-    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto flex flex-col items-center pt-48">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-16"
-      >
-        <h2 className="text-4xl md:text-5xl font-semibold text-[#1C1D20] mb-4">
-          Meeting notes in 3 steps
-        </h2>
-        <p className="text-[#6B6D76] text-xl font-medium">
-          The easiest way to get beautiful, shareable<br/>meeting notes.
-        </p>
-      </motion.div>
+    <section className="py-24 px-6 md:px-12 relative overflow-hidden bg-white">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]" 
+        style={{ 
+          backgroundImage: `radial-gradient(#000 1px, transparent 1px), radial-gradient(#000 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          backgroundPosition: '0 0, 20px 20px'
+        }} 
+      />
 
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 w-full"
-      >
-        {/* Step 1 */}
-        <motion.div variants={itemVariants} className="flex flex-col gap-6 items-center text-center">
-          <div className="bg-[#F6F8FA] rounded-3xl w-full aspect-[4/3] flex items-center justify-center relative shadow-inner overflow-hidden border border-[#e8e9ec]">
-            <div className="absolute bottom-0 w-[80%] h-[70%] bg-white rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border border-gray-100 flex p-4">
-              <div className="bg-black text-white px-3 py-1.5 rounded-md text-xs font-medium self-start mt-4 ml-4">Start Cluely</div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-[#1C1D20] mb-4"
+          >
+            How It Works
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-[#6B6D76] text-xl font-medium"
+          >
+            Get Million Views In Three Simple Steps
+          </motion.p>
+        </div>
+
+        <div className="relative">
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-100 via-blue-500 to-blue-100 -translate-x-1/2 hidden md:block" />
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col gap-24 md:gap-32"
+          >
+            {/* Step 1 */}
+            <div className="relative flex flex-col md:flex-row items-center">
+              <div className="hidden md:block w-1/2 pr-20 text-right">
+                <motion.div variants={itemVariants} className="inline-block">
+                  <span className="text-5xl md:text-7xl font-bold text-blue-500/80 block">10B+ Views</span>
+                  <span className="text-blue-400 font-bold tracking-widest text-xs uppercase mt-2 block">Campaign Reach Delivered</span>
+                  <p className="text-gray-400 text-sm mt-4 max-w-xs ml-auto">Start with 3 to 5 distinct hooks and test them simultaneously.</p>
+                </motion.div>
+              </div>
+
+              {/* Center Dot */}
+              <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-[0_0_10px_rgba(59,130,246,0.5)] z-20 hidden md:block" />
+
+              <div className="w-full md:w-1/2 md:pl-20">
+                <motion.div variants={itemVariants} className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-gray-100 relative group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">1</div>
+                    <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Step</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#1C1D20] mb-4">{steps[0].title}</h3>
+                  <p className="text-[#6B6D76] text-lg leading-relaxed">{steps[0].description}</p>
+                </motion.div>
+              </div>
             </div>
-          </div>
-          <div className="text-left w-full px-2">
-            <h3 className="text-xl font-semibold text-[#1C1D20] flex items-center gap-3">
-              <span className="text-gray-300 font-normal">1</span> Start Cluely
-            </h3>
-            <p className="text-[#6B6D76] text-sm mt-2 max-w-[280px]">
-              Simply click Start Cluely before your meeting begins.
-            </p>
-          </div>
-        </motion.div>
 
-        {/* Step 2 */}
-        <motion.div variants={itemVariants} className="flex flex-col gap-6 items-center text-center">
-          <div className="bg-[#F6F8FA] rounded-3xl w-full aspect-[4/3] flex items-center justify-center relative shadow-inner overflow-hidden border border-[#e8e9ec]">
-             <div className="absolute w-[80%] h-12 bg-zinc-800 rounded-full flex items-center justify-center gap-4 text-white">
-                <div className="w-8 h-8 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center"><span className="w-3 h-3 bg-red-500 rounded-sm"></span></div>
-             </div>
-          </div>
-          <div className="text-left w-full px-2">
-            <h3 className="text-xl font-semibold text-[#1C1D20] flex items-center gap-3">
-              <span className="text-gray-300 font-normal">2</span> End Cluely
-            </h3>
-            <p className="text-[#6B6D76] text-sm mt-2 max-w-[280px]">
-              Click the Stop button to end recording. That's it.
-            </p>
-          </div>
-        </motion.div>
+            {/* Step 2 */}
+            <div className="relative flex flex-col md:flex-row items-center">
+              <div className="w-full md:w-1/2 md:pr-20 order-2 md:order-1">
+                <motion.div variants={itemVariants} className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-gray-100 relative group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">2</div>
+                    <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Step</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#1C1D20] mb-4">{steps[1].title}</h3>
+                  <p className="text-[#6B6D76] text-lg leading-relaxed">{steps[1].description}</p>
+                </motion.div>
+              </div>
 
-        {/* Step 3 */}
-        <motion.div variants={itemVariants} className="flex flex-col gap-6 items-center text-center">
-          <div className="bg-[#F6F8FA] rounded-3xl w-full aspect-[4/3] flex flex-col items-center justify-end relative shadow-inner overflow-hidden border border-[#e8e9ec]">
-            <div className="w-[70%] h-[80%] bg-white rounded-t-xl shadow-lg border border-gray-100 p-4">
-              <div className="w-1/2 h-3 bg-gray-200 rounded-full mb-3"></div>
-              <div className="w-3/4 h-3 bg-gray-200 rounded-full mb-6"></div>
-              <div className="w-full h-2 bg-gray-100 rounded-full mb-2"></div>
-              <div className="w-full h-2 bg-gray-100 rounded-full mb-2"></div>
-              <div className="w-4/5 h-2 bg-gray-100 rounded-full mb-2"></div>
+              {/* Center Dot */}
+              <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-[0_0_10px_rgba(59,130,246,0.5)] z-20 hidden md:block" />
+
+              <div className="hidden md:block w-1/2 pl-20 order-1 md:order-2">
+                <motion.div variants={itemVariants}>
+                  <span className="text-5xl md:text-7xl font-bold text-blue-500/80 block">60K+ Clippers</span>
+                  <span className="text-blue-400 font-bold tracking-widest text-xs uppercase mt-2 block">Active Creator Network</span>
+                  <p className="text-gray-400 text-sm mt-4 max-w-xs">Stagger posting windows to maintain momentum and broaden reach.</p>
+                </motion.div>
+              </div>
             </div>
-          </div>
-          <div className="text-left w-full px-2">
-            <h3 className="text-xl font-semibold text-[#1C1D20] flex items-center gap-3">
-              <span className="text-gray-300 font-normal">3</span> Get notes
-            </h3>
-            <p className="text-[#6B6D76] text-sm mt-2 max-w-[280px]">
-              Cluely uses what it heard and what it saw on your screen to generate notes.
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
+
+            {/* Step 3 */}
+            <div className="relative flex flex-col md:flex-row items-center">
+              <div className="hidden md:block w-1/2 pr-20 text-right">
+                <motion.div variants={itemVariants} className="inline-block">
+                  <span className="text-5xl md:text-7xl font-bold text-blue-500/80 block">340% Lift</span>
+                  <span className="text-blue-400 font-bold tracking-widest text-xs uppercase mt-2 block">Engagement Spikes</span>
+                  <p className="text-gray-400 text-sm mt-4 max-w-xs ml-auto">Scale only the edits with strong hold rate and repost velocity.</p>
+                </motion.div>
+              </div>
+
+              {/* Center Dot */}
+              <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-[0_0_10px_rgba(59,130,246,0.5)] z-20 hidden md:block" />
+
+              <div className="w-full md:w-1/2 md:pl-20">
+                <motion.div variants={itemVariants} className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-gray-100 relative group hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">3</div>
+                    <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Step</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#1C1D20] mb-4">{steps[2].title}</h3>
+                  <p className="text-[#6B6D76] text-lg leading-relaxed">{steps[2].description}</p>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
+
 

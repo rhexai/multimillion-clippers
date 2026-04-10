@@ -2,12 +2,12 @@ import { ChevronDown } from "lucide-react";
 
 export default function FAQ() {
   const faqs = [
-    "Why real-time vs. a regular AI notetaker?",
-    "Who is Cluely for?",
-    "Is Cluely free?",
-    "How is it undetectable in meetings?",
-    "What languages and apps are supported?",
-    "Can I talk to customer support?"
+    "How do you guarantee multimillion views?",
+    "Who is Multimillion Clippers for?",
+    "Are the clippers real people or AI?",
+    "How fast is the turnaround for each campaign?",
+    "What platforms do you support?",
+    "How do I get started with my first campaign?"
   ];
 
   return (
