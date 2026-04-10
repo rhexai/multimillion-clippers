@@ -26,7 +26,7 @@ export default function Navbar() {
           />
         </Link>
         <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white/80"}`}>
-          <Link href="#pricing" className={`hover:text-current transition-colors ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}>Pricing</Link>
+          <Link href="https://wa.link/tpojam" className={`hover:text-current transition-colors ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}>Pricing</Link>
           <Link href="https://whop.com/joined/multimillionclippers/products/clippercommunity/" className={`hover:text-current transition-colors flex items-center gap-2 ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}>
             Join Clipper Community <span className={`${isScrolled ? "bg-blue-600 text-white" : "bg-white/20 text-white"} text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider`}>New</span>
           </Link>
@@ -34,9 +34,12 @@ export default function Navbar() {
         </div>
       </div>
       <div className="hidden sm:block">
-        <button className="bg-[var(--color-brand-blue)] hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(33,107,233,0.5)]">
+        <Link 
+          href="https://wa.link/tpojam" 
+          className="bg-[var(--color-brand-blue)] hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(33,107,233,0.5)]"
+        >
           <img src="/mmclipperslogo.png" alt="" className="w-9 h-9 object-contain brightness-0 invert" /> Launch Campaign
-        </button>
+        </Link>
       </div>
     </nav>
   );

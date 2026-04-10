@@ -13,10 +13,13 @@ export default function Footer() {
             <p className="text-xl md:text-2xl text-[#6B6D76] mb-10 font-medium max-w-lg">
               Start your first multimillion view campaign today.
             </p>
-            <button className="bg-[#4D8AF0] hover:bg-blue-600 shadow-[0_12px_40px_rgba(77,138,240,0.3)] text-white text-lg font-semibold px-8 py-4 rounded-full transition-all flex items-center justify-center gap-3 active:scale-95 mx-auto md:mx-0">
+            <Link 
+              href="https://wa.link/tpojam"
+              className="bg-[#4D8AF0] hover:bg-blue-600 shadow-[0_12px_40px_rgba(77,138,240,0.3)] text-white text-lg font-semibold px-8 py-4 rounded-full transition-all flex items-center justify-center gap-3 active:scale-95 mx-auto md:mx-0 w-fit"
+            >
               <img src="/mmclipperslogo.png" alt="" className="w-9 h-9 object-contain brightness-0 invert" />
               <span>Launch Campaign</span>
-            </button>
+            </Link>
           </div>
 
           {/* Floating Key Decorations - High fidelity neumorphic style */}
@@ -68,7 +71,7 @@ export default function Footer() {
               <a href="#" className="hover:text-black transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-black transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-black transition-colors">FAQ</a>
-              <a href="#" className="hover:text-black transition-colors text-blue-600">Book intro call</a>
+              <a href="https://wa.link/tpojam" className="hover:text-black transition-colors text-blue-600">Book intro call</a>
             </nav>
           </div>
         </div>

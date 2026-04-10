@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -33,12 +34,15 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <button className="bg-[var(--color-brand-blue)] hover:bg-blue-600 shadow-[0_10px_40px_rgba(33,107,233,0.8)] text-white text-lg font-medium px-6 py-3 rounded-full transition-all flex items-center gap-2 mb-16 relative overflow-hidden group">
+          <Link 
+            href="https://wa.link/tpojam" 
+            className="bg-[var(--color-brand-blue)] hover:bg-blue-600 shadow-[0_10px_40px_rgba(33,107,233,0.8)] text-white text-lg font-medium px-6 py-3 rounded-full transition-all flex items-center gap-2 mb-16 relative overflow-hidden group w-fit mx-auto"
+          >
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
             <span className="relative z-10 flex items-center gap-2">
-              <img src="/mmclipperslogo.png" alt="" className="w-10 h-10 object-contain brightness-0 invert" /> Get your content clipped
+              <img src="/mmclipperslogo.png" alt="" className="w-10 h-10 object-contain brightness-0 invert" /> Launch Campaign
             </span>
-          </button>
+          </Link>
         </motion.div>
       </div>
 
