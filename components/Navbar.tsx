@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,32 +16,96 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { name: "Pricing", href: "https://wa.link/tpojam" },
+    { 
+      name: "Join Clipper Community", 
+      href: "https://whop.com/joined/multimillionclippers/products/clippercommunity/",
+      badge: "New" 
+    },
+    { name: "Blog", href: "#blog" },
+  ];
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 ${isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200" : "glass-nav border-b border-[var(--color-nav-border)]"}`}>
-      <div className="flex items-center gap-12">
-        <Link href="/" className="flex items-center">
-          <img
-            src="/mmclippers.png"
-            alt="Multimillion Clippers Logo"
-            className={`h-[120px] md:h-[150px] w-auto object-contain transition-all duration-300 ${isScrolled ? "brightness-0 opacity-80" : ""}`}
-          />
-        </Link>
-        <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white/80"}`}>
-          <Link href="https://wa.link/tpojam" className={`hover:text-current transition-colors ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}>Pricing</Link>
-          <Link href="https://whop.com/joined/multimillionclippers/products/clippercommunity/" className={`hover:text-current transition-colors flex items-center gap-2 ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}>
-            Join Clipper Community <span className={`${isScrolled ? "bg-blue-600 text-white" : "bg-white/20 text-white"} text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider`}>New</span>
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 ${isScrolled || isMenuOpen ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200" : "glass-nav border-b border-[var(--color-nav-border)]"}`}>
+        <div className="flex items-center gap-12">
+          <Link href="/" className="flex items-center">
+            <img
+              src="/mmclippers.png"
+              alt="Multimillion Clippers Logo"
+              className={`h-[100px] md:h-[150px] w-auto object-contain transition-all duration-300 ${isScrolled || isMenuOpen ? "brightness-0 opacity-80" : ""}`}
+            />
           </Link>
-          <Link href="#blog" className={`hover:text-current transition-colors ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}>Blog</Link>
+          <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white/80"}`}>
+            {navLinks.map((link) => (
+              <Link 
+                key={link.name}
+                href={link.href} 
+                className={`hover:text-current transition-colors flex items-center gap-2 ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}
+              >
+                {link.name}
+                {link.badge && (
+                  <span className={`${isScrolled ? "bg-blue-600 text-white" : "bg-white/20 text-white"} text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider`}>
+                    {link.badge}
+                  </span>
+                )}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:block">
+            <Link 
+              href="https://wa.link/tpojam" 
+              className="bg-[var(--color-brand-blue)] hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(33,107,233,0.5)]"
+            >
+              <img src="/mmclipperslogo.png" alt="" className="w-9 h-9 object-contain brightness-0 invert" /> Launch Campaign
+            </Link>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled || isMenuOpen ? "text-gray-900 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Dropdown Menu */}
+      <div className={`fixed inset-x-0 top-[80px] z-40 bg-white border-b border-gray-200 shadow-xl transition-all duration-300 md:hidden overflow-hidden ${isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className="flex flex-col p-6 gap-6">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.name}
+              href={link.href} 
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-semibold text-[#1C1D20] flex items-center justify-between group"
+            >
+              <span className="flex items-center gap-3">
+                {link.name}
+                {link.badge && (
+                  <span className="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    {link.badge}
+                  </span>
+                )}
+              </span>
+              <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-blue-600 transition-colors" />
+            </Link>
+          ))}
+          <Link 
+            href="https://wa.link/tpojam"
+            onClick={() => setIsMenuOpen(false)}
+            className="mt-4 bg-[var(--color-brand-blue)] text-white text-center py-4 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(33,107,233,0.3)]"
+          >
+            <img src="/mmclipperslogo.png" alt="" className="w-8 h-8 object-contain brightness-0 invert" />
+            Launch Campaign
+          </Link>
         </div>
       </div>
-      <div className="hidden sm:block">
-        <Link 
-          href="https://wa.link/tpojam" 
-          className="bg-[var(--color-brand-blue)] hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(33,107,233,0.5)]"
-        >
-          <img src="/mmclipperslogo.png" alt="" className="w-9 h-9 object-contain brightness-0 invert" /> Launch Campaign
-        </Link>
-      </div>
-    </nav>
+    </>
   );
 }

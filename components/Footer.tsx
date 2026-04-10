@@ -2,15 +2,15 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-b from-white to-[#D4E0F4] pt-24 pb-8 px-6 md:px-12 relative overflow-hidden">
+    <footer className="w-full bg-gradient-to-b from-white to-[#D4E0F4] pt-20 md:pt-24 pb-8 px-6 md:px-12 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col pt-10 relative z-10">
         {/* Footer Top Section with CTA and Floating Keys */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 mb-24 relative">
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 mb-20 md:mb-24 relative">
           <div className="flex-1 text-center md:text-left">
-            <h2 className="text-4xl md:text-[56px] font-semibold text-[#1C1D20] mb-3 leading-[1.1] tracking-tighter text-balance">
+            <h2 className="text-4xl md:text-[56px] font-semibold text-[#1C1D20] mb-4 md:mb-3 leading-[1.1] tracking-tighter text-balance">
               Viral content that commands attention, not just scrolls.
             </h2>
-            <p className="text-xl md:text-2xl text-[#6B6D76] mb-10 font-medium max-w-lg">
+            <p className="text-lg md:text-2xl text-[#6B6D76] mb-8 md:mb-10 font-medium max-w-lg mx-auto md:mx-0">
               Start your first multimillion view campaign today.
             </p>
             <Link 
