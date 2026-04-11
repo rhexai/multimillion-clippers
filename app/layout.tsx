@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: "Multimillion Clippers | #1 Clipping Community",
   description: "Get millions of views organically. Zero wasted budget.",
   icons: {
-    icon: "/mmclipperslogo.png",
-    apple: "/mmclipperslogo.png",
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 

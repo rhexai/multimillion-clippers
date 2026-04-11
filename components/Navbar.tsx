@@ -28,13 +28,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 ${isScrolled || isMenuOpen ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200" : "glass-nav border-b border-[var(--color-nav-border)]"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-3 md:px-6 py-4 transition-all duration-300 ${isScrolled || isMenuOpen ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200" : "glass-nav border-b border-[var(--color-nav-border)]"}`}>
         <div className="flex items-center gap-12">
           <Link href="/" className="flex items-center">
             <img
               src="/mmclippers.png"
               alt="Multimillion Clippers Logo"
-              className={`h-[100px] md:h-[150px] w-auto object-contain transition-all duration-300 ${isScrolled || isMenuOpen ? "brightness-0 opacity-80" : ""}`}
+              className={`h-[80px] md:h-[150px] w-auto object-contain transition-all duration-300 ${isScrolled || isMenuOpen ? "brightness-0 opacity-80" : ""}`}
             />
           </Link>
           <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white/80"}`}>
