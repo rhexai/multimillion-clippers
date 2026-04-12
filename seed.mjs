@@ -1,12 +1,24 @@
-import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
+import { createClient } from '@supabase/supabase-js';
+import fs from 'fs';
 
-const prisma = new PrismaClient();
+// Read .env.local manually since we're in node
+const envLocal = fs.readFileSync('.env.local', 'utf8');
+let URL = '';
+let Secret_Key = '';
 
-async function main() {
-  console.log("Seeding initial blog posts...");
+for (const line of envLocal.split('\n')) {
+  if (line.startsWith('URL=')) URL = line.replace('URL=', '').trim();
+  if (line.startsWith('Secret_Key=')) Secret_Key = line.replace('Secret_Key=', '').trim();
+}
 
-  const posts = [
+if (!URL || !Secret_Key) {
+    console.error("Could not find URL or Secret_Key in .env.local");
+    process.exit(1);
+}
+
+const supabase = createClient(URL, Secret_Key);
+
+const posts = [
     {
       title: "AI Clip Generators vs Clipping Agencies",
       slug: "ai-clip-generators-vs-clipping-agencies",
@@ -71,24 +83,23 @@ async function main() {
       `,
       image: "/cover.png"
     }
-  ];
+];
 
-  for (const post of posts) {
-    await prisma.post.upsert({
-      where: { slug: post.slug },
-      update: {},
-      create: post,
-    });
-  }
-
-  console.log("Seeding completed successfully!");
+async function seed() {
+    console.log("Seeding Supabase...");
+    for (const post of posts) {
+        // Upsert by slug wasn't fully clean in pure supabase insert if there's no unique constraint handler
+        // but we'll try to delete it first to make it idempotent
+        await supabase.from("Post").delete().eq("slug", post.slug);
+        
+        const { error } = await supabase.from("Post").insert(post);
+        if (error) {
+            console.error("Error inserting", post.slug, error);
+        } else {
+            console.log("Inserted:", post.title);
+        }
+    }
+    console.log("Done!");
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+seed();

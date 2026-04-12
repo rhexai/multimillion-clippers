@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { supabase } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 
 export async function createPost(data: {
@@ -12,16 +12,23 @@ export async function createPost(data: {
   image?: string;
 }) {
   try {
-    const post = await prisma.post.create({
-      data: {
-        title: data.title,
-        slug: data.slug,
-        category: data.category,
-        excerpt: data.excerpt,
-        content: data.content,
-        image: data.image || "/cover.png",
-      },
-    });
+    const { data: post, error } = await supabase
+      .from("Post")
+      .insert([
+        {
+          title: data.title,
+          slug: data.slug,
+          category: data.category,
+          excerpt: data.excerpt,
+          content: data.content,
+          image: data.image || "/cover.png",
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) throw error;
+
     revalidatePath("/account");
     revalidatePath("/blog");
     return { success: true, post };
@@ -31,26 +38,34 @@ export async function createPost(data: {
   }
 }
 
-export async function updatePost(id: string, data: {
-  title: string;
-  slug: string;
-  category: string;
-  excerpt: string;
-  content: string;
-  image?: string;
-}) {
+export async function updatePost(
+  id: string,
+  data: {
+    title: string;
+    slug: string;
+    category: string;
+    excerpt: string;
+    content: string;
+    image?: string;
+  }
+) {
   try {
-    const post = await prisma.post.update({
-      where: { id },
-      data: {
+    const { data: post, error } = await supabase
+      .from("Post")
+      .update({
         title: data.title,
         slug: data.slug,
         category: data.category,
         excerpt: data.excerpt,
         content: data.content,
         image: data.image || "/cover.png",
-      },
-    });
+      })
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) throw error;
+
     revalidatePath("/account");
     revalidatePath("/blog");
     revalidatePath(`/blog/${post.slug}`);
@@ -63,9 +78,9 @@ export async function updatePost(id: string, data: {
 
 export async function deletePost(id: string) {
   try {
-    const post = await prisma.post.delete({
-      where: { id },
-    });
+    const { error } = await supabase.from("Post").delete().eq("id", id);
+    if (error) throw error;
+
     revalidatePath("/account");
     revalidatePath("/blog");
     return { success: true };
@@ -77,9 +92,13 @@ export async function deletePost(id: string) {
 
 export async function getPosts() {
   try {
-    return await prisma.post.findMany({
-      orderBy: { createdAt: "desc" },
-    });
+    const { data: posts, error } = await supabase
+      .from("Post")
+      .select("*")
+      .order("createdAt", { ascending: false });
+
+    if (error) throw error;
+    return posts || [];
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -88,9 +107,14 @@ export async function getPosts() {
 
 export async function getPostBySlug(slug: string) {
   try {
-    return await prisma.post.findUnique({
-      where: { slug },
-    });
+    const { data: post, error } = await supabase
+      .from("Post")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+
+    if (error) throw error;
+    return post;
   } catch (error) {
     console.error("Error fetching post by slug:", error);
     return null;

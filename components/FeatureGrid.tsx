@@ -1,108 +1,85 @@
 "use client";
 
-import { CheckCircle, ArrowRight, Video, FileText } from "lucide-react";
-import { motion } from "framer-motion";
+export default function FeatureGrid({ caseStudies }: { caseStudies: any[] }) {
+  const items = caseStudies && caseStudies.length > 0 ? caseStudies : [];
+  
+  // Split items into two rows to scroll in opposite directions
+  // Row 1: First half or even indexed items
+  // Row 2: Second half or odd indexed items
+  const row1Items = items.filter((_, i) => i % 2 === 0);
+  const row2Items = items.filter((_, i) => i % 2 !== 0);
 
-export default function FeatureGrid() {
+  // Repeat items exactly twice for seamless -50% animation loop
+  const marqueeRow1 = row1Items.length > 0 ? [...row1Items, ...row1Items] : [];
+  const marqueeRow2 = row2Items.length > 0 ? [...row2Items, ...row2Items] : [];
+
+  const Card = ({ study, index }: { study: any, index: number }) => (
+    <div 
+      key={(study.id || index) + "-" + index}
+      className="group relative bg-[#F6F8FA] rounded-none overflow-hidden flex flex-col cursor-pointer shrink-0 w-[300px] md:w-[420px] border border-gray-100 hover:border-gray-300 transition-colors shadow-sm hover:shadow-xl"
+    >
+      <div className="h-48 md:h-64 relative overflow-hidden bg-gray-900">
+        <img 
+          src={study.image}
+          alt={study.title}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent pointer-events-none" />
+      </div>
+      
+      <div className="p-6 flex flex-col gap-4 bg-white relative z-20 grow">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-2">
+            <span className="px-2.5 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full uppercase tracking-wider border border-blue-100">
+              {study.category}
+            </span>
+            {study.budget && (
+              <span className="px-2.5 py-1 bg-gray-50 text-gray-600 text-[10px] font-bold rounded-full uppercase tracking-wider border border-gray-200">
+                Budget: {study.budget}
+              </span>
+            )}
+          </div>
+          <span className="text-blue-600 text-sm font-bold tracking-tight">
+            {study.metric}
+          </span>
+        </div>
+
+        <h3 className="text-base md:text-lg font-semibold text-[#1C1D20] leading-snug transition-colors group-hover:text-blue-600 line-clamp-3">
+          {study.title}
+        </h3>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto flex flex-col gap-12 md:gap-20">
-      <div className="text-center">
-        <h2 className="text-4xl md:text-6xl font-semibold text-[#1C1D20] mb-4 md:mb-6 tracking-tight">
+    <section className="py-16 md:py-32 overflow-hidden flex flex-col gap-10 md:gap-16">
+      <div className="text-center px-6 md:px-12 max-w-7xl mx-auto">
+        <h2 className="text-3xl md:text-6xl font-semibold text-[#1C1D20] mb-4 md:mb-6 tracking-tight leading-tight">
           Engineered for <span className="text-blue-600">Virality.</span>
         </h2>
-        <p className="text-[#6B6D76] text-lg md:text-xl font-medium max-w-2xl mx-auto px-4">
-          Our specialized team handles everything from platform-specific edits to distributed launch waves.
+        <p className="text-[#6B6D76] text-sm md:text-xl font-medium max-w-2xl mx-auto">
+          See how our platform drives unprecedented engagement across every industry through data-backed case studies.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-        {/* Card 1 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="bg-[#F6F8FA] rounded-[32px] md:rounded-[40px] p-8 md:p-12 flex flex-col items-start gap-6 md:gap-8"
-        >
-          <div className="flex flex-col gap-4">
-            <h3 className="text-3xl md:text-4xl font-semibold text-[#1C1D20] leading-tight max-w-sm">
-              Viral Audience Intelligence
-            </h3>
-            <p className="text-[#6B6D76] text-base md:text-lg max-w-sm font-medium">
-              Understand exactly who is watching your content and what makes them share across TikTok and Reels.
-            </p>
-          </div>
-          
-          <div className="w-full bg-white rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col gap-4 md:gap-6 mt-auto">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-blue-500" />
-                <span className="text-[10px] md:text-xs font-bold text-blue-500 uppercase tracking-wider">Live Audience Data</span>
-              </div>
-              <div className="h-6 px-3 bg-blue-50 rounded-full flex items-center justify-center text-[10px] font-bold text-blue-600 uppercase">98% Match</div>
-            </div>
-            <div className="flex items-center gap-3 md:gap-4 border-b border-gray-50 pb-4 md:pb-6">
-              <div className="h-10 w-10 md:h-12 md:w-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg shadow-inner">Z</div>
-              <div>
-                <div className="font-bold text-gray-800 text-sm md:text-base">Gen Z • Africa</div>
-                <div className="text-xs md:text-sm text-gray-500">85% Engagement • 12.4M Views</div>
-              </div>
-            </div>
-            <p className="text-xs md:text-sm text-gray-600 leading-relaxed italic">
-              "High hold-rate detected in the first 3 seconds for this demographic. Recommended hook: Action-first intro."
-            </p>
-          </div>
-        </motion.div>
+      <div className="w-full overflow-hidden relative flex flex-col gap-6 md:gap-11">
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        
+        {/* Row 1: Moves Left */}
+        <div className="animate-marquee flex gap-6 md:gap-8 px-4 w-max">
+          {marqueeRow1.map((study, index) => (
+            <Card key={`r1-${index}`} study={study} index={index} />
+          ))}
+        </div>
 
-        {/* Card 2 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-[#F6F8FA] rounded-[32px] md:rounded-[40px] p-8 md:p-12 flex flex-col items-start gap-6 md:gap-8 overflow-hidden relative"
-        >
-          <div className="flex flex-col gap-4">
-            <h3 className="text-3xl md:text-4xl font-semibold text-[#1C1D20] leading-tight max-w-sm">
-              AI-Powered Clip Extraction
-            </h3>
-            <p className="text-[#6B6D76] text-base md:text-lg max-w-sm font-medium">
-              Our proprietary engine identifies the top 1% of high-retention moments from your long-form videos.
-            </p>
-          </div>
-
-          <div className="w-full bg-white rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col gap-4 md:gap-6 mt-auto">
-            <div className="flex items-center justify-between border-b border-gray-50 pb-4">
-               <div className="flex items-center gap-2">
-                 <div className="w-5 h-5 md:w-6 md:h-6 bg-blue-100 rounded-lg flex items-center justify-center text-xs text-blue-600">★</div>
-                 <span className="text-xs md:text-sm font-bold text-[#1C1D20]">Viral Moment Found</span>
-               </div>
-               <div className="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-full uppercase tracking-wider">High Potential</div>
-            </div>
-            <div className="flex flex-col gap-3">
-               <div className="w-full h-2 bg-gray-50 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '92%' }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="h-full bg-blue-500" 
-                  />
-               </div>
-               <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                  <span>Hold Rate</span>
-                  <span className="text-blue-600">92%</span>
-               </div>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-4 md:p-5 border border-gray-100">
-              <h4 className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-1.5">Auto-extracted segment</h4>
-              <h3 className="font-bold text-sm md:text-base text-gray-800 leading-tight">Podcast: Why Africa is the next content frontier</h3>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="px-2.5 py-1 bg-gray-900 text-white text-[10px] md:text-xs rounded-md font-mono">02:45 — 03:15</div>
-                <div className="text-[10px] md:text-xs text-gray-400 font-semibold italic text-right flex-1">Processing wave...</div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        {/* Row 2: Moves Right */}
+        <div className="animate-marquee-reverse flex gap-6 md:gap-8 px-4 w-max">
+          {marqueeRow2.map((study, index) => (
+            <Card key={`r2-${index}`} study={study} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
