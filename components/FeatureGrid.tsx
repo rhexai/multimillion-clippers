@@ -16,7 +16,7 @@ export default function FeatureGrid({ caseStudies }: { caseStudies: any[] }) {
   const Card = ({ study, index }: { study: any, index: number }) => (
     <div 
       key={(study.id || index) + "-" + index}
-      className="group relative bg-[#F6F8FA] rounded-none overflow-hidden flex flex-col cursor-pointer shrink-0 w-[300px] md:w-[420px] border border-gray-100 hover:border-gray-300 transition-colors shadow-sm hover:shadow-xl"
+      className="group relative bg-[#F6F8FA] rounded-none overflow-hidden flex flex-col cursor-pointer shrink-0 w-[280px] md:w-[420px] border border-gray-100 hover:border-gray-300 transition-colors shadow-sm hover:shadow-xl"
     >
       <div className="h-48 md:h-64 relative overflow-hidden bg-gray-900">
         <img 
@@ -59,11 +59,11 @@ export default function FeatureGrid({ caseStudies }: { caseStudies: any[] }) {
           Engineered for <span className="text-blue-600">Virality.</span>
         </h2>
         <p className="text-[#6B6D76] text-sm md:text-xl font-medium max-w-2xl mx-auto">
-          See how our platform drives unprecedented engagement across every industry through data-backed case studies.
+          See how our platform drives unprecedented engagement across every industry through viral clips.
         </p>
       </div>
 
-      <div className="w-full overflow-hidden relative flex flex-col gap-6 md:gap-11">
+      <div className="w-full overflow-hidden relative flex flex-col gap-4 md:gap-11">
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
         

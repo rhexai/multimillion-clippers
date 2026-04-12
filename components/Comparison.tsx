@@ -13,10 +13,10 @@ export default function Comparison() {
         className="text-center mb-6"
       >
         <h2 className="text-4xl md:text-7xl font-semibold text-[#1C1D20] mb-6 tracking-tight leading-[1.1]">
-          No manual clipping.<br />Just pure performance.
+          Quality content creation is expensive.
         </h2>
         <p className="text-[#6B6D76] text-lg md:text-xl font-medium max-w-2xl mx-auto px-4">
-          We combine data-backed hook research with a global creator network to out-pace traditional agencies.
+          Influencer marketing is hit-or-miss with High upfront costs, unclear ROI, and unreliable results.
         </p>
       </motion.div>
 
@@ -48,19 +48,21 @@ export default function Comparison() {
                 <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-yellow-500" />
                 <div className="w-1/2 h-1 bg-white/20 rounded-full" />
              </div>
-             <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 text-white/60 text-[10px] md:text-xs font-medium">Delivery: 7-14 Days</div>
+             <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 text-white/60 text-[10px] md:text-xs font-medium">Delivery: 3weeks-2months</div>
           </motion.div>
         </div>
 
         {/* Multimillion Clippers */}
         <div className="bg-[#606478] rounded-[24px] md:rounded-[32px] p-6 md:p-10 flex flex-col items-center pt-12 md:pt-16 relative overflow-hidden text-center border-2 border-transparent hover:border-white/10 transition-all">
           <h3 className="text-2xl md:text-3xl font-semibold text-white mb-3 md:mb-4 flex items-center gap-2">
-            <div className="w-6 h-6 md:w-8 md:h-8 rounded bg-white text-[#606478] flex items-center justify-center font-bold text-lg md:text-xl leading-none">M</div>
+            <div className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
+               <img src="/mmclipperslogo.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
             Multimillion Clippers
           </h3>
           <div className="flex items-center gap-2 text-white/80 font-medium mb-8 md:mb-12 text-sm md:text-base">
             <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px]">✓</div>
-            24-hour turnaround, data-backed hooks
+            Viral clips, large creator community
           </div>
           
           <motion.div 
@@ -77,8 +79,8 @@ export default function Comparison() {
                    <div className="w-1/2 h-3 md:h-4 bg-blue-500/50 rounded-full mt-4 md:mt-6" />
                 </div>
                 <div className="w-1/2 h-full relative overflow-hidden flex flex-col items-center justify-center p-3 md:p-4">
-                   <div className="text-3xl md:text-4xl font-bold text-white mb-1">24h</div>
-                   <div className="text-[8px] md:text-[10px] text-white/50 font-bold uppercase tracking-tighter text-center">Turnaround Time</div>
+                   <div className="text-base md:text-lg font-bold text-white mb-1 text-center leading-tight">Results in days</div>
+                   <div className="text-[8px] md:text-[10px] text-white/50 font-bold uppercase tracking-tighter text-center">not months</div>
                    <div className="mt-3 md:mt-4 w-full h-0.5 md:h-1 bg-white/10 rounded-full overflow-hidden">
                       <div className="h-full bg-blue-400 w-full animate-pulse" />
                    </div>

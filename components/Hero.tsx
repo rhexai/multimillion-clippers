@@ -61,38 +61,13 @@ export default function Hero() {
             <div className="w-3 h-3 rounded-full bg-green-400"></div>
           </div>
 
-          {/* Mockup content / video call fake view */}
-          <div className="flex-1 bg-black rounded-2xl md:rounded-[24px] overflow-hidden relative flex">
-            <div className="w-1/2 h-full bg-zinc-800 border-r border-zinc-900 overflow-hidden relative">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80')] bg-cover bg-center opacity-80" />
-            </div>
-            <div className="w-1/2 h-full bg-zinc-800 relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80')] bg-cover bg-center opacity-80" />
-            </div>
-
-            {/* Floating widget over the mockup */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="absolute inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[600px] glass-panel rounded-2xl p-4 md:p-6 shadow-2xl border border-white/20 bg-[#1C1D20]/90 backdrop-blur-3xl text-left z-30"
-            >
-              <div className="flex justify-between items-start mb-3 md:mb-4">
-                <div className="bg-[#1E5DE5] text-white px-3 py-1 md:px-4 md:py-2 rounded-xl rounded-tr-sm text-[10px] md:text-sm font-medium shadow-[0_0_20px_rgba(33,107,233,0.4)]">
-                  Viral Hook Found ✨
-                </div>
-              </div>
-              <p className="text-white text-xs md:text-lg font-medium leading-relaxed mb-4 md:mb-6">
-                "This 30-second segment has a 92% viral probability. The creators are already prepping the first distribution wave."
-              </p>
-              <div className="flex flex-wrap items-center gap-3 text-[10px] md:text-sm text-zinc-400 mb-3 md:mb-4 border-t border-zinc-800 pt-3 md:pt-4">
-                <span className="flex items-center gap-1 shrink-0">📈 High Sentiment</span>
-                <span className="flex items-center gap-1 shrink-0">📱 Reels • TikTok</span>
-              </div>
-              <div className="bg-zinc-950/50 border border-zinc-800/50 rounded-lg px-3 py-2 text-zinc-500 text-[10px] md:text-sm flex items-center">
-                Reviewing viral metrics...
-              </div>
-            </motion.div>
+          {/* Mockup content */}
+          <div className="flex-1 bg-black rounded-2xl md:rounded-[24px] overflow-hidden relative">
+            <img 
+              src="/cover.png" 
+              alt="Platform Demo" 
+              className="absolute inset-0 w-full h-full object-cover" 
+            />
           </div>
         </div>
       </motion.div>
