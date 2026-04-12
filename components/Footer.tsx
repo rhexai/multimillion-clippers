@@ -4,36 +4,6 @@ export default function Footer() {
   return (
     <footer className="w-full bg-gradient-to-b from-white to-[#D4E0F4] pt-20 md:pt-24 pb-8 px-6 md:px-12 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col pt-10 relative z-10">
-        {/* Footer Top Section with CTA and Floating Keys */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 mb-20 md:mb-24 relative">
-          <div className="flex-1 text-center md:text-left">
-            <h2 className="text-4xl md:text-[56px] font-semibold text-[#1C1D20] mb-4 md:mb-3 leading-[1.1] tracking-tighter text-balance">
-              Viral content that commands attention, not just scrolls.
-            </h2>
-            <p className="text-lg md:text-2xl text-[#6B6D76] mb-8 md:mb-10 font-medium max-w-lg mx-auto md:mx-0">
-              Start your first multimillion view campaign today.
-            </p>
-            <Link 
-              href="https://wa.link/tpojam"
-              className="bg-[#4D8AF0] hover:bg-blue-600 shadow-[0_12px_40px_rgba(77,138,240,0.3)] text-white text-lg font-semibold px-8 py-4 rounded-full transition-all flex items-center justify-center gap-3 active:scale-95 mx-auto md:mx-0 w-fit"
-            >
-              <img src="/mmclipperslogo.png" alt="" className="w-9 h-9 object-contain brightness-0 invert" />
-              <span>Launch Campaign</span>
-            </Link>
-          </div>
-
-          {/* Floating Key Decorations - High fidelity neumorphic style */}
-          <div className="hidden md:block flex-1 relative h-[360px]">
-            {/* Enter Key */}
-            <div className="absolute top-0 right-[15%] w-36 h-36 bg-white rounded-[32px] shadow-[0_30px_60px_rgba(0,0,0,0.04),inset_0_-10px_20px_rgba(0,0,0,0.02),inset_0_10px_20px_rgba(255,255,255,1)] flex items-center justify-center transform rotate-12 -translate-y-8 select-none">
-              <span className="text-5xl text-gray-200 transform -scale-x-100 italic">↵</span>
-            </div>
-            {/* Command Key */}
-            <div className="absolute bottom-[20%] right-[40%] w-36 h-36 bg-white rounded-[40px] shadow-[0_30px_60px_rgba(0,0,0,0.04),inset_0_-10px_20px_rgba(0,0,0,0.02),inset_0_10px_20px_rgba(255,255,255,1)] flex items-center justify-center transform -rotate-6 select-none">
-              <span className="text-5xl text-gray-200">⌘</span>
-            </div>
-          </div>
-        </div>
 
         {/* Brand and Links Section */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 py-20 border-t border-gray-300">

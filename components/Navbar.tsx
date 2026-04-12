@@ -3,10 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
 
-export default function Navbar() {
+export default function Navbar({ forceSolidBg = false }: { forceSolidBg?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userId } = useAuth();
+  
+  const isSolid = isScrolled || isMenuOpen || forceSolidBg;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,30 +27,30 @@ export default function Navbar() {
       href: "https://whop.com/joined/multimillionclippers/products/clippercommunity/",
       badge: "New" 
     },
-    { name: "Blog", href: "#blog" },
+    { name: "Blog", href: "/blog" },
   ];
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 transition-all duration-300 ${isScrolled || isMenuOpen ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200" : "glass-nav border-b border-[var(--color-nav-border)]"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 transition-all duration-300 ${isSolid ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200" : "glass-nav border-b border-[var(--color-nav-border)]"}`}>
         <div className="flex items-center gap-12">
           <Link href="/" className="flex items-center">
             <img
               src="/mmclippers.png"
               alt="Multimillion Clippers Logo"
-              className={`h-[110px] md:h-[150px] w-auto object-contain transition-all duration-300 ${isScrolled || isMenuOpen ? "brightness-0" : ""}`}
+              className={`h-[110px] md:h-[150px] w-auto object-contain transition-all duration-300 ${isSolid ? "brightness-0" : ""}`}
             />
           </Link>
-          <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white/80"}`}>
+          <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${isScrolled || forceSolidBg ? "text-gray-900" : "text-white/80"}`}>
             {navLinks.map((link) => (
               <Link 
                 key={link.name}
                 href={link.href} 
-                className={`hover:text-current transition-colors flex items-center gap-2 ${isScrolled ? "hover:text-blue-600" : "hover:text-white"}`}
+                className={`hover:text-current transition-colors flex items-center gap-2 ${isScrolled || forceSolidBg ? "hover:text-blue-600" : "hover:text-white"}`}
               >
                 {link.name}
                 {link.badge && (
-                  <span className={`${isScrolled ? "bg-blue-600 text-white" : "bg-white/20 text-white"} text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider`}>
+                  <span className={`${isScrolled || forceSolidBg ? "bg-blue-600 text-white" : "bg-white/20 text-white"} text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider`}>
                     {link.badge}
                   </span>
                 )}
@@ -56,7 +60,14 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden sm:block">
+          <div className="hidden sm:flex items-center gap-4">
+            {userId && (
+              <>
+                <Link href="/account" className={`text-sm font-semibold transition-colors ${isSolid ? "text-gray-900 hover:text-blue-600" : "text-white/80 hover:text-white"}`}>Dashboard</Link>
+                <UserButton />
+              </>
+            )}
+
             <Link 
               href="https://wa.link/tpojam" 
               className="bg-[var(--color-brand-blue)] hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(33,107,233,0.5)]"
@@ -68,7 +79,7 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled || isMenuOpen ? "text-gray-900 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
+            className={`md:hidden p-2 rounded-lg transition-colors ${isSolid ? "text-gray-900 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
