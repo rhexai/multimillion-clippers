@@ -8,7 +8,18 @@ import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 import { getCaseStudies } from "@/app/actions/case-study";
 
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
+  const { userId } = await auth();
+
+  if (userId) {
+    redirect("/account");
+  }
+
   const caseStudies = await getCaseStudies();
 
   return (

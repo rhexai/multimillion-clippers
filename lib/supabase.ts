@@ -1,14 +1,17 @@
 import { createClient } from "@supabase/supabase-js";
 
-if (!process.env.SUPABASE_URL) {
-  throw new Error("Missing Supabase URL");
+const supabaseUrl = process.env.SUPABASE_URL || "";
+const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY || "";
+
+if (!supabaseUrl) {
+  console.warn("⚠️ Missing Supabase URL environment variable.");
 }
 
-if (!process.env.SUPABASE_SECRET_KEY) {
-  throw new Error("Missing Supabase Secret Key");
+if (!supabaseSecretKey) {
+  console.warn("⚠️ Missing Supabase Secret Key environment variable.");
 }
 
-// We use the SUPABASE_SECRET_KEY (service role key) here because
-// these actions run on the server side and allow us to bypass RLS for now,
-// similar to how Prisma had full DB access.
-export const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SECRET_KEY);
+export const supabase = createClient(
+  supabaseUrl || "https://placeholder.supabase.co",
+  supabaseSecretKey || "placeholder_key"
+);
